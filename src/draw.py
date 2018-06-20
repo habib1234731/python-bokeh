@@ -5,23 +5,34 @@ from bokeh.plotting import figure
 from bokeh.models import GraphRenderer, StaticLayoutProvider, Oval
 from bokeh.palettes import Spectral8
 
-N = 8
+from graph import *
+
+graph_data = Graph()
+graph_data.debug_create_test_data()
+print(graph_data.vertices)
+
+N = 9
 node_indices = list(range(N))
 
-plot = figure(title='Graph Layout Demonstration', x_range=(-1.1,1.1), y_range=(-1.1,1.1),
+debug_pallete = Spectral8
+debug_pallete.append('#ff0000')
+debug_pallete.append('#ffff00')
+
+plot = figure(title='Graph Layout Demonstration', x_range=(-500,500), y_range=(-500,500),
               tools='', toolbar_location=None)
 
 graph = GraphRenderer()
 
 graph.node_renderer.data_source.add(node_indices, 'index')
-graph.node_renderer.data_source.add(Spectral8, 'color')
-graph.node_renderer.glyph = Oval(height=0.1, width=0.2, fill_color='color')
+graph.node_renderer.data_source.add(debug_pallete, 'color')
+graph.node_renderer.glyph = Oval(height=20, width=40, fill_color='color')
 
 graph.edge_renderer.data_source.data = dict(
     start=[0]*N,
     end=node_indices)
 
 ### start of layout code
+### Looks like this is setting the positions of the vertices
 circ = [i*2*math.pi/8 for i in node_indices]
 x = [math.cos(i) for i in circ]
 y = [math.sin(i) for i in circ]
