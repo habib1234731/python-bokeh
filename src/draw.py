@@ -2,7 +2,7 @@ import math
 
 from bokeh.io import show, output_file
 from bokeh.plotting import figure
-from bokeh.models import GraphRenderer, StaticLayoutProvider, Oval
+from bokeh.models import GraphRenderer, StaticLayoutProvider, Oval, LabelSet, ColumnDataSource
 from bokeh.palettes import Spectral8
 
 from graph import *
@@ -47,6 +47,14 @@ graph.edge_renderer.data_source.data = dict(
 x = [v.pos['x'] for v in graph_data.vertices]
 y = [v.pos['y'] for v in graph_data.vertices]
 
+# data = dict(x, y,values = graph_data.get_values())
+label_source = ColumnDataSource(data= dict(
+    x = [v.pos['x'] for v in graph_data.vertices],
+    y = [v.pos['y'] for v in graph_data.vertices],
+    values = graph_data.get_values())
+)
+labels = LabelSet(x='x', y='y', text='values', level='glyph',
+            text_align='center', source=label_source, render_mode='canvas')
 print('x is ',x)
 print('y is ',y)
 
@@ -54,6 +62,8 @@ graph_layout = dict(zip(node_indices, zip(x, y)))
 graph.layout_provider = StaticLayoutProvider(graph_layout=graph_layout)
 
 plot.renderers.append(graph)
+plot.add_layout(labels)
 
 output_file('graph.html')
 show(plot)
+

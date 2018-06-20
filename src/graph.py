@@ -20,12 +20,14 @@ class Graph:
         # print(debug_vertex_1.pos['x'])
         
         debug_edge_1 = Edge(debug_vertex_1)
-        # debug_vertex_1.edges.append(debug_edge_1)
+        debug_vertex_1.edges.append(debug_edge_1)
 
         debug_edge_2 = Edge(debug_vertex_2)
-        # debug_vertex_3.edges.append(debug_edge_2)
+        debug_vertex_3.edges.append(debug_edge_2)
 
         debug_edge_3 = Edge(debug_vertex_3)
-        # debug_vertex_4.edges.append(debug_edge_3)
+        debug_vertex_4.edges.append(debug_edge_3)
 
         self.vertices.extend([debug_vertex_1, debug_vertex_2, debug_vertex_3, debug_vertex_4])
+    def get_values(self):
+        return [v.value for v in self.vertices]
