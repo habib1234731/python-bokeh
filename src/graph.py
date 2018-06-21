@@ -45,7 +45,7 @@ class Graph:
         for y in range(height):
             row = []
             for x in range(width):
-                vert = Vertex('t')
+                vert = Vertex('t' + str(count+1))
                 count += 1
                 row.append(vert)
             grid.append(row)
@@ -75,11 +75,11 @@ class Graph:
         for y in range(height):
             for x in range(width):
                 self.vertices.append(grid[y][x])
-
+        print([x.color for x in self.vertices])
     def get_values(self):
         return [v.value for v in self.vertices]
     def bfs(self, start):
-        print('called BFS')
+        # print('called BFS')
         random_color = "#"+''.join([random.choice('0123456789ABCDEF') for j in range(6)])
         queue = []
         found = []
@@ -97,7 +97,7 @@ class Graph:
                     queue.append(edge.destination)
                     edge.destination.color = random_color
             queue.pop(0) #TODO: Look into collections.dequeue
-        print('found', found, ' completed and exiting from BFS')
+        # print('found', found, ' completed and exiting from BFS')
     def get_connected_components(self):
         components = []
         for vertex in self.vertices:

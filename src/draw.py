@@ -8,13 +8,13 @@ from bokeh.palettes import Spectral8
 from graph import *
 
 graph_data = Graph()
-graph_data.debug_create_test_data()
-# graph_data.randomize(50,40,250,0.6)
+# graph_data.debug_create_test_data()
+graph_data.randomize(5,4,150,0.6)
 graph_data.get_connected_components()
 
 print(graph_data.vertices)
 
-N = 9
+N = len(graph_data.vertices)
 node_indices = list(range(N))
 
 # debug_pallete = Spectral8
@@ -25,7 +25,7 @@ color_list = []
 for vertex in graph_data.vertices:
     color_list.append(vertex.color)
 
-plot = figure(title='Graph Layout Demonstration', x_range=(0,500), y_range=(0,500),
+plot = figure(title='Graph Layout Demonstration', x_range=(0,750), y_range=(0,600),
               tools='', toolbar_location=None)
 
 graph = GraphRenderer()
