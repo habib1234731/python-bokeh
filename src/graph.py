@@ -45,7 +45,7 @@ class Graph:
         for y in range(height):
             row = []
             for x in range(width):
-                vert = Vertex('t + {count+1}')
+                vert = Vertex('t')
                 count += 1
                 row.append(vert)
             grid.append(row)
@@ -98,4 +98,9 @@ class Graph:
                     edge.destination.color = random_color
             queue.pop(0) #TODO: Look into collections.dequeue
         print('found', found, ' completed and exiting from BFS')
+    def get_connected_components(self):
+        components = []
+        for vertex in self.vertices:
+            if vertex not in components:
+                components.append(self.bfs(vertex))
         

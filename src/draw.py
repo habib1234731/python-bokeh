@@ -8,9 +8,9 @@ from bokeh.palettes import Spectral8
 from graph import *
 
 graph_data = Graph()
-# graph_data.debug_create_test_data()
-graph_data.randomize(5,4,2,0.6)
-graph_data.bfs(graph_data.vertices[1])
+graph_data.debug_create_test_data()
+# graph_data.randomize(50,40,250,0.6)
+graph_data.get_connected_components()
 
 print(graph_data.vertices)
 
@@ -25,7 +25,7 @@ color_list = []
 for vertex in graph_data.vertices:
     color_list.append(vertex.color)
 
-plot = figure(title='Graph Layout Demonstration', x_range=(-500,500), y_range=(-500,500),
+plot = figure(title='Graph Layout Demonstration', x_range=(0,500), y_range=(0,500),
               tools='', toolbar_location=None)
 
 graph = GraphRenderer()
@@ -33,7 +33,7 @@ graph = GraphRenderer()
 graph.node_renderer.data_source.add(node_indices, 'index')
 #changed debug_palette to color_list
 graph.node_renderer.data_source.add(color_list, 'color')
-graph.node_renderer.glyph = Circle(radius = 40, fill_color='color')
+graph.node_renderer.glyph = Circle(radius = 20, fill_color='color')
 
 
 ### this is drawing the edges from start to end
