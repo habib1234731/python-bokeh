@@ -2,13 +2,15 @@ import math
 
 from bokeh.io import show, output_file
 from bokeh.plotting import figure
-from bokeh.models import GraphRenderer, StaticLayoutProvider, Oval, LabelSet, ColumnDataSource
+from bokeh.models import GraphRenderer, StaticLayoutProvider, Circle, LabelSet, ColumnDataSource
 from bokeh.palettes import Spectral8
 
 from graph import *
 
 graph_data = Graph()
 graph_data.debug_create_test_data()
+graph_data.bfs(graph_data.vertices[1])
+
 print(graph_data.vertices)
 
 N = 9
@@ -30,7 +32,7 @@ graph = GraphRenderer()
 graph.node_renderer.data_source.add(node_indices, 'index')
 #changed debug_palette to color_list
 graph.node_renderer.data_source.add(color_list, 'color')
-graph.node_renderer.glyph = Oval(height=20, width=40, fill_color='color')
+graph.node_renderer.glyph = Circle(radius = 40, fill_color='color')
 
 
 ### this is drawing the edges from start to end
@@ -63,7 +65,7 @@ label_source = ColumnDataSource(data= dict(
     values = graph_data.get_values())
 )
 labels = LabelSet(x='x', y='y', text='values', level='glyph',
-            text_align='center', source=label_source, render_mode='canvas')
+            text_align='center',text_baseline='middle', source=label_source, render_mode='canvas')
 print('x is ',x)
 print('y is ',y)
 
