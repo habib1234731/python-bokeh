@@ -8,7 +8,8 @@ from bokeh.palettes import Spectral8
 from graph import *
 
 graph_data = Graph()
-graph_data.debug_create_test_data()
+# graph_data.debug_create_test_data()
+graph_data.randomize(5,4,2,0.6)
 graph_data.bfs(graph_data.vertices[1])
 
 print(graph_data.vertices)
