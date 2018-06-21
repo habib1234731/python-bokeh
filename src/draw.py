@@ -32,12 +32,21 @@ graph.node_renderer.data_source.add(node_indices, 'index')
 graph.node_renderer.data_source.add(color_list, 'color')
 graph.node_renderer.glyph = Oval(height=20, width=40, fill_color='color')
 
+
 ### this is drawing the edges from start to end
 # print([0]*N)
+start_indexes = []
+end_indexes = []
+
+for start_index, vertex in enumerate(graph_data.vertices):
+    for e in vertex.edges:
+        start_indexes.append(start_index)
+        end_indexes.append(graph_data.vertices.index(e.destination))
+
 graph.edge_renderer.data_source.data = dict(
-    start= [1,2,3,4,5,6,7,8,9], #[0]*N, #this is why all the edges start from the first vertex
+    start= start_indexes, #[0]*N, #this is why all the edges start from the first vertex
                 #and is a list of some kind that has to do with starting points
-    end=node_indices) #this is a list of some kind that has to do with ending points
+    end=end_indexes) #this is a list of some kind that has to do with ending points
 
 ### start of layout code
 ### This is setting the positions of the vertices

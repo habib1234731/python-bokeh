@@ -20,7 +20,7 @@ class Graph:
         # print(debug_vertex_1.pos['x'])
         
         debug_edge_1 = Edge(debug_vertex_1)
-        debug_vertex_1.edges.append(debug_edge_1)
+        debug_vertex_2.edges.append(debug_edge_1)
 
         debug_edge_2 = Edge(debug_vertex_2)
         debug_vertex_3.edges.append(debug_edge_2)
